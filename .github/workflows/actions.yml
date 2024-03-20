@@ -2,18 +2,21 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '2 * * * *' # Every minute
+    - cron: '* * * * *' # Every minute
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true  # Opting out of Node16 enforcement
+  
     steps:
 
       - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner
+        uses: actions/checkout@v3 # Update to the latest version that supports Node16
 
       - name: setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Update to the latest version that supports Node16
         with:
           python-version: '3.9' # install the python version needed
           
